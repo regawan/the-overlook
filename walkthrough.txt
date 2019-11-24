@@ -1,0 +1,7 @@
+Walthrough of Andreas Wager's text adventure game 'The Overlook'
+
+The Pantry room:
+Pick up the fireaxe and use it on the door.
+
+The Kitchen:
+Go east to the bar. Talk to Loyd and get his keycard.
