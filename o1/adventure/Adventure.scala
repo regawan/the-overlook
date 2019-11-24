@@ -53,14 +53,14 @@ class Adventure {
       else "You swing your knife and hit noone."
     }
   })
-  this.diner.addItem(new Item("money", "___________________________________\n|#######====================#######|\n|#(|)*UNITED STATES OF AMERICA*(|)#|\n" + raw"|#**          /===\   ********  **#|" + "\n|*# {G}      | (') |             #*|\n" + raw"|#*  ******  | /v\ |    O N E    *#|" + "\n" + raw"|#(|)         \===/            (|)#|" + "\n|##=========TEN DOLLARS==========##|\n------------------------------------\nIt's 10 dollars."){
+  this.diner.addItem(new Item("money", "___________________________________\n|#######====================#######|\n|#(|)*UNITED STATES OF AMERICA*(|)#|\n" + raw"|#**          /===\   ********  **#|" + "\n|*# {G}      | (') |             #*|\n" + raw"|#*  ******  | /v\ |    O N E    *#|" + "\n" + raw"|#(|)         \===/            (|)#|" + "\n|##=========TEN DOLLARS==========##|\n------------------------------------\n\nIt's 10 dollars."){
     def use = {
       if (player.location == bartender.location){
         player.drop("money")
         bartender.get("money")
         "You buy a glass of bourbon. Loyd seems happy, you should speak with him again."
       }
-      else "I think I should use these in the bar instead."
+      else "I think I should use this in the bar instead."
     }
   })
   
