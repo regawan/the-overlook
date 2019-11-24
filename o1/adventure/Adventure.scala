@@ -30,7 +30,7 @@ class Adventure {
          home.setNeighbors(Vector(                                       "south" -> lobby                     ))
 
   //place these two items in diner and bar, respectively
-  this.pantry.addItem(new Item("fireaxe", "It's a fireaxe. Has many uses..."){
+  this.pantry.addItem(new Item("fireaxe", "             +-+\n=============| |\n            `:_;'\n\nIt's a fireaxe. Has many uses..."){
     def use = {
       if (player.location == pantry){
         pantry.setNeighbors(Vector("north" -> kitchen))
@@ -39,7 +39,12 @@ class Adventure {
       else "You swing your axe but hit nothing."
     }
   })
-  this.kitchen.addItem(new Item("knife", "It's a big kitchen knife. Recently sharpened."){
+  this.kitchen.addItem(new Item("knife", {
+        "___________________________________ ______________________\n"+
+        raw"\                                  | (_)     (_)    (_)   \ " + "\n" +
+        raw" `.                                |  __________________   }" +"\n" +
+        raw"   `-..........................____|_(                  )_/" + "\n\nIt's a big kitchen knife. Recently sharpened."
+  }){
     def use = {
       if (player.location == wendy.location){
         lobby.setNeighbors(Vector("north" -> home,"south" -> kitchen))
@@ -48,7 +53,7 @@ class Adventure {
       else "You swing your knife and hit noone."
     }
   })
-  this.diner.addItem(new Item("money", "It's 10 dollars."){
+  this.diner.addItem(new Item("money", "___________________________________\n|#######====================#######|\n|#(|)*UNITED STATES OF AMERICA*(|)#|\n" + raw"|#**          /===\   ********  **#|" + "\n|*# {G}      | (') |             #*|\n" + raw"|#*  ******  | /v\ |    O N E    *#|" + "\n" + raw"|#(|)         \===/            (|)#|" + "\n|##=========TEN DOLLARS==========##|\n------------------------------------\nIt's 10 dollars."){
     def use = {
       if (player.location == bartender.location){
         player.drop("money")
@@ -69,11 +74,11 @@ class Adventure {
   /** The number of turns that have passed since the start of the game. */
   var turnCount = 0
   /** The maximum number of turns that this adventure game allows before time runs out. */
-  val timeLimit = 20
+  val timeLimit = 25
 
 
   /** Determines if the adventure is complete, that is, if the player has won. */
-  def isComplete = this.player.has("knife")
+  def isComplete = false
 
   /** Determines whether the player has won, lost, or quit, thereby ending the game. */
   def isOver = this.isComplete || this.player.hasQuit || this.turnCount == this.timeLimit

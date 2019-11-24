@@ -79,7 +79,7 @@ class Player(name: String,startingArea: Area) {
   }
   
   def help = {
-    "Your objective is to make her stay forever, one way or the other.\nWalk around the hotel and beat the challenges.\nHint: You remember Wendy is in the lobby.\nCommand list:\ngo <direction>\nrest\nget <item>\ndrop <item>\ninventory\nexamine <item>\nsay <name>\n use <item>\nquit"
+    "Your objective is to make her stay forever, one way or the other.\nWalk around the hotel and beat the challenges.\nHint: You remember Wendy is in the lobby.\nCommand list:\ngo <direction>\nrest\nget <item>\ndrop <item>\ninventory\nexamine <item>\nsay <name>\nuse <item>\nquit"
   }
   
   def use(itemName: String) = {
