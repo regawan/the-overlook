@@ -13,7 +13,6 @@ class Player(name: String,startingArea: Area) {
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
   private var itemsCarried = Map[String, Item]()
-  private var loydIsHappy = false
 
 
   /** Determines if the player has indicated a desire to quit the game. */
@@ -90,14 +89,17 @@ class Player(name: String,startingArea: Area) {
     else "If you want to use something, you need to pick it up first."
   }
   
+  var loydIsHappy = false
+  
   def say(name: String) = {
     if (name == "loyd"){
       if (this.location.name == "Bar"){
         if (this.loydIsHappy){
+              val currentLoc = this.location
               this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
                 def use = {
-                if (location.name == "Kitchen"){
-                    location.setNeighbor("north", new Area("lobby", "The lobby of Overlook is incredible"))
+                if (currentLoc.name == "Kitchen"){
+                    currentLoc.setNeighbors(Vector("north" -> currentLoc.neighbor("north").get))
                     "You unlock the door to the lobby."
                   }
                   else "You can't use the keycard here."
@@ -114,10 +116,10 @@ class Player(name: String,startingArea: Area) {
             else {
               this.loydIsHappy = true
               this.itemsCarried -= "money"
-              "Here you go. I'll be here if you need anything."
+              "Thank you for your purchase. I'll be here if you need anything."
             }
           }
-          else "Very well then"
+          else "Ok then."
         }
       }
       else "If you want to talk to Loyd you should find him first."

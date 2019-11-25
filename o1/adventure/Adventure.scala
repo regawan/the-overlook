@@ -39,8 +39,7 @@ class Adventure {
       else "You swing your axe but hit nothing."
     }
   })
-  this.kitchen.addItem(new Item("knife", 
-           "___________________________________ ______________________\n"+
+  this.kitchen.addItem(new Item("knife", "___________________________________ ______________________\n"+
         raw"\                                  | (_)     (_)    (_)   \ " + "\n" +
         raw" `.                                |  __________________   }" +"\n" +
         raw"   `-..........................____|_(                  )_/" + "\n\nIt's a big kitchen knife. Recently sharpened."
@@ -53,17 +52,7 @@ class Adventure {
       else "You swing your knife and hit noone."
     }
   })
-  this.diner.addItem(new Item("money", 
-      "___________________________________\n" +
-      "|#######====================#######|\n"+ 
-      "|#(|)*UNITED STATES OF AMERICA*(|)#|\n" + 
-      raw"|#**          /===\   ********  **#|" + 
-      "\n|*# {G}      | (') |             #*|\n" + 
-      raw"|#*  ******  | /v\ |    T E N    *#|" + "\n" + 
-      raw"|#(|)         \===/            (|)#|" + 
-      "\n|##=========TEN DOLLARS==========##|\n" +
-      "------------------------------------\n\n"+
-      "It's 10 dollars."){
+  this.diner.addItem(new Item("money", "___________________________________\n|#######====================#######|\n|#(|)*UNITED STATES OF AMERICA*(|)#|\n" + raw"|#**          /===\   ********  **#|" + "\n|*# {G}      | (') |             #*|\n" + raw"|#*  ******  | /v\ |    T E N    *#|" + "\n" + raw"|#(|)         \===/            (|)#|" + "\n|##=========TEN DOLLARS==========##|\n------------------------------------\n\nIt's 10 dollars."){
     def use = {
       if (player.location == bartender.location){
         player.say("loyd")
