@@ -51,7 +51,7 @@ class Player(name: String,startingArea: Area) {
     ""
   }
   
-  
+  //Get specified item
   def get(itemName: String) = {
     if (this.location.contains(itemName)) {
       this.itemsCarried += itemName -> this.location.removeItem(itemName).get
@@ -60,8 +60,10 @@ class Player(name: String,startingArea: Area) {
     else s"There is no $itemName here to pick up."
   }
   
+  //Determines whether the player has a specified item
   def has(itemName: String) = this.itemsCarried.contains(itemName)
   
+  //Drops an item to the current area
   def drop(itemName: String) = {
     if (this.has(itemName)){
       this.location.addItem(this.itemsCarried(itemName))
@@ -69,23 +71,27 @@ class Player(name: String,startingArea: Area) {
       s"You drop the $itemName."
     } else "You don't have that!"
   }
-
+  
+  //Returns a description of the specified item
   def examine(itemName: String) = {
     if (this.has(itemName))
       "You look closely at the " + itemName + ".\n" + this.itemsCarried(itemName).description
     else "If you want to examine something, you need to pick it up first."
   }
   
+  //Returns a string with all carried items
   def inventory = {
     if (this.itemsCarried.nonEmpty)
       "You are carrying\n" + this.itemsCarried.keys.mkString("\n")
     else "You are empty-handed."
   }
   
+  //Returns a a few tips if you get lost and a list of available commands
   def help = {
     "Your objective is to make her stay forever, one way or the other.\nWalk around the hotel and complete the tasks.\nHint: You remember Wendy is in the lobby.\nCommand list:\ngo <direction>\nrest\nget <item>\ndrop <item>\ninventory\nexamine <item>\nsay <name>\nuse <item>\nquit"
   }
   
+  //Uses the specified item
   def use(itemName: String) = {
     if (this.has(itemName)){
       this.itemsCarried(itemName).use
