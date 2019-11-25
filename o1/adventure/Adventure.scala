@@ -18,12 +18,14 @@ class Adventure {
   private val kitchen     = new Area("Kitchen", "You are in the hotel kitchen. Not a soul.\nIt's eerily quiet.")
   private val bar         = new Area("Bar", "You are in the hotel bar. There's a man standing behind the counter.\nHe looks right through you. Just as if you really weren't there.\nYou remember that his name is Loyd.\nThe exits to the east are blocked by butlers.")
   private val diner       = new Area("Diner", "You are the hotel diner. It's empty.\nThe exits to west are blocked from the inside.")
-  private val lobby       = new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA child and a woman ")
+  private var lobby       = new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA pale woman is looking at you, it's Wendy!"){
+    isPassable = false
+  }
   private val home        = new Area("Home", "Home sweet home! Now the only thing you need is a working remote control.")
   private val destination = home
 
        pantry.setNeighbors(Vector(/*"north" -> kitchen*/                                                          ))
-      kitchen.setNeighbors(Vector(/*"north" -> lobby,*/   "east" -> bar,     "south" -> pantry, "west" -> diner   ))
+      kitchen.setNeighbors(Vector("north" -> lobby,   "east" -> bar,     "south" -> pantry, "west" -> diner   ))
           bar.setNeighbors(Vector(                                                          "west" -> kitchen ))
         diner.setNeighbors(Vector(                    "east" -> kitchen                                       ))
         lobby.setNeighbors(Vector(/*north" -> home,*/                       "south" -> kitchen                   ))
@@ -86,7 +88,6 @@ class Adventure {
   /** The maximum number of turns that this adventure game allows before time runs out. */
   val timeLimit = 25
 
-
   /** Determines if the adventure is complete, that is, if the player has won. */
   def isComplete = this.wendyIsDead
 
@@ -94,16 +95,18 @@ class Adventure {
   def isOver = this.isComplete || this.player.hasQuit || this.turnCount == this.timeLimit || player.failed
 
   /** Returns a message that is to be displayed to the player at the beginning of the game. */
-  def welcomeMessage = { "\nd888888b db   db d88888b       .d88b.  db    db d88888b d8888b. db       .d88b.   .d88b.  db   dD\n" + 
-  "`~~88~~' 88   88 88'          .8P  Y8. 88    88 88'     88  `8D 88      .8P  Y8. .8P  Y8. 88 ,8P'\n" +
-  "   88    88ooo88 88ooooo      88    88 Y8    8P 88ooooo 88oobY' 88      88    88 88    88 88,8P\n" + 
-  "   88    88~~~88 88~~~~~      88    88 `8b  d8' 88~~~~~ 88`8b   88      88    88 88    88 88`8b\n" +
-  "   88    88   88 88.          `8b  d8'  `8bd8'  88.     88 `88. 88booo. `8b  d8' `8b  d8' 88 `88.\n" + 
-  "   YP    YP   YP Y88888P       `Y88P'     YP    Y88888P 88   YD Y88888P  `Y88P'   `Y88P'  YP   YD\n\n" +
-  "You wake up in a cold room with a throbbing headache.\n" +
-  "Oddly, you can't remember why you are here and your head is bleeding.\n" +
-  "You see a bunch of Heinz baked beans on some shelves, jummy.\n\n" +
-  "There's a door in front of you with the word Redrum, you get a strange urge. MAKE HER STAY FOREVER!"
+  def welcomeMessage = { 
+    "\nd888888b db   db d88888b       .d88b.  db    db d88888b d8888b. db       .d88b.   .d88b.  db   dD\n" + 
+    "`~~88~~' 88   88 88'          .8P  Y8. 88    88 88'     88  `8D 88      .8P  Y8. .8P  Y8. 88 ,8P'\n" +
+    "   88    88ooo88 88ooooo      88    88 Y8    8P 88ooooo 88oobY' 88      88    88 88    88 88,8P\n" + 
+    "   88    88~~~88 88~~~~~      88    88 `8b  d8' 88~~~~~ 88`8b   88      88    88 88    88 88`8b\n" +
+    "   88    88   88 88.          `8b  d8'  `8bd8'  88.     88 `88. 88booo. `8b  d8' `8b  d8' 88 `88.\n" + 
+    "   YP    YP   YP Y88888P       `Y88P'     YP    Y88888P 88   YD Y88888P  `Y88P'   `Y88P'  YP   YD\n\n" +
+    "You wake up in a cold room with a throbbing headache.\n" +
+    "Oddly, you can't remember why you are here and your head is bleeding.\n" +
+    "You see a bunch of Heinz baked beans on some shelves, jummy.\n\n" +
+    "There's a door in front of you with the word Redrum. Mabye you could hit it with something... \n" + 
+    "You get a strange urge. MAKE HER STAY FOREVER!"
   }
 
   /** Returns a message that is to be displayed to the player at the end of the game. The message
@@ -111,10 +114,10 @@ class Adventure {
   def goodbyeMessage = {
     if (this.isComplete)
       "You made her stay, a happy family stays together.\nGame completed."
-    else if (this.turnCount == this.timeLimit)
+    else if (this.turnCount == this.timeLimit) //All turns have been used
       "Oh no! You collapsed from the bleeding.\nGame over!"
-    else if (player.failed)
-      "Oh no! Wendy saw your knife and escaped!\nGame over!"
+    else if (player.failed) //Wendy escapes as she notices your knife
+      "Oh no! Wendy saw your knife and escaped!\nYou lost her!"
     else  // game over due to player quitting
       "Quitter!"
   }

@@ -13,9 +13,11 @@ class Area(var name: String, var description: String) {
 
   private val neighbors = Map[String, Area]()
   private val items = Map[String, Item]()
+  var isPassable = true //If one can go throug the exit or not
   
   def addItem(item: Item) = this.items += item.name -> item
   
+  //Removes a specified item from the area
   def removeItem(itemName: String) = {
     this.items.contains(itemName) match{
       case true => {
@@ -27,6 +29,7 @@ class Area(var name: String, var description: String) {
     }
   }
   
+  //Determines whether the item is in the area
   def contains(itemName: String) = this.items.contains(itemName)
   
   

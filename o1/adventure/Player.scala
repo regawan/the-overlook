@@ -28,8 +28,12 @@ class Player(name: String,startingArea: Area) {
     * a description of the result: "You go DIRECTION." or "You can't go DIRECTION." */
   def go(direction: String) = {
     val destination = this.location.neighbor(direction)
-    this.currentLocation = destination.getOrElse(this.currentLocation)
-    if (destination.isDefined) "You go " + direction + "." else "You can't go " + direction + "."
+    if (destination.isDefined && destination.get.isPassable ) {
+      "You go " + direction + "."
+      this.currentLocation = destination.getOrElse(this.currentLocation)
+    }
+    if (destination.isDefined && !destination.get.isPassable) "The door is locked. It looks like it can be opened with a keycard."
+    else"You can't go " + direction + "."
   }
 
 
@@ -79,7 +83,7 @@ class Player(name: String,startingArea: Area) {
   }
   
   def help = {
-    "Your objective is to make her stay forever, one way or the other.\nWalk around the hotel and beat the challenges.\nHint: You remember Wendy is in the lobby.\nCommand list:\ngo <direction>\nrest\nget <item>\ndrop <item>\ninventory\nexamine <item>\nsay <name>\nuse <item>\nquit"
+    "Your objective is to make her stay forever, one way or the other.\nWalk around the hotel and complete the tasks.\nHint: You remember Wendy is in the lobby.\nCommand list:\ngo <direction>\nrest\nget <item>\ndrop <item>\ninventory\nexamine <item>\nsay <name>\nuse <item>\nquit"
   }
   
   def use(itemName: String) = {
@@ -101,10 +105,7 @@ class Player(name: String,startingArea: Area) {
           this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
             def use = {
               if (location.name == "Kitchen"){
-                location.setNeighbor("north", new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA pale woman is looking at you, it's Wendy!"){
-                  this.setNeighbor("south", location)
-                  val wendy = new Player("Wendy Torrance", this)
-                })
+                location.neighbor("north").get.isPassable = true
                 "You unlock the door to the lobby."
               }
               else "You can't use the keycard here."
@@ -133,11 +134,11 @@ class Player(name: String,startingArea: Area) {
       if (this.location.name == "Lobby"){
         if (!this.has("knife")){
           this.wendyIsHappy = true
-          "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'"
+          "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'\nWendy: 'Show me the way, honey.'"
         }
         else {
           this.failed=true
-          "You: 'Hi Wendy. Why are you crying? You are going to stay here forever!'\nWendy: 'No Jack, I know what you are doing... You are a MONSTER!!!\n       'The police is waiting behind that door, go to hell Jack.'"
+          "You: 'Hi Wendy. Why are you crying? We are going to stay here forever!'\nWendy: 'No Jack, I know what you are doing... You are a MONSTER!!!\n       'The police is waiting behind that door, go to hell Jack.'"
         }
       } 
       else "If you want to talk to Wendy you should find her first."
