@@ -32,11 +32,13 @@ class Adventure {
          home.setNeighbors(Vector(                                       "south" -> lobby                     ))
 
   //place these three items in pantry, kitchen and diner
-  this.pantry.addItem(new Item("fireaxe", "             +-+\n=============| |\n            `:_;'\n\nIt's a fireaxe. Has many uses..."){
+  this.pantry.addItem(new Item("fireaxe", "             +-+\n=============| |\n            `:_;'\n\nIt's an old rusty fireaxe. Has many uses..."){
     def use = {
       if (player.location == pantry){
         pantry.setNeighbors(Vector("north" -> kitchen))
-        "You use the fireaxe to destroy the hinges. The door falls to the ground."
+        player.itemsCarried -= "fireaxe"
+        "You use the fireaxe to destroy the hinges. The door falls to the ground.\n" +
+        "The fireaxe broke in the the process"
       }
       else "You swing your axe but hit nothing."
     }

@@ -12,7 +12,7 @@ class Player(name: String,startingArea: Area) {
 
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
-  private var itemsCarried = Map[String, Item]()
+  var itemsCarried = Map[String, Item]()
 
 
   /** Determines if the player has indicated a desire to quit the game. */
@@ -97,12 +97,8 @@ class Player(name: String,startingArea: Area) {
   var wendyIsHappy = false
   var failed = false
   
-  //say function that interacts with NPC's
-  def say(name: String) = {
-    if (name == "loyd"){
-      if (this.location.name == "Bar"){
-        if (this.loydIsHappy){ // Loyd is happy if you buy a drink with money.
-          this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
+  
+  val keycard = new Item("keycard", "It's Loyd's keycard.") {
             def use = {
               if (location.name == "Kitchen"){
                 location.neighbor("north").get.isPassable = true
@@ -110,7 +106,14 @@ class Player(name: String,startingArea: Area) {
               }
               else "You can't use the keycard here."
             }
-          })
+          }
+  
+  //say function that interacts with NPC's
+  def say(name: String) = {
+    if (name == "loyd"){
+      if (this.location.name == "Bar"){
+        if (this.loydIsHappy){ // Loyd is happy if you buy a drink with money.
+          this.location.addItem(keycard)
           this.loydIsHappy = false
           "You: 'Hi Loyd. I always liked you. You were always the best of them.'\n     'Best goddamned bartender from Timbuctoo to Portland Maine.'\nLoyd: 'Thank you for saying so.'\nYou: 'You know Loyd, I'm in a pickle here.'\nLoyd: 'How can I help you Sir?'\nYou: 'I really need to get to the lobby, but it's locked.'\nLoyd: 'Of course, feel free to use my keycard. On one condition though, you have to return it.'"
         }
