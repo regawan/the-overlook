@@ -23,7 +23,7 @@ class Adventure {
   private val destination = home
 
        pantry.setNeighbors(Vector(/*"north" -> kitchen*/                                                          ))
-      kitchen.setNeighbors(Vector("north" -> lobby,   "east" -> bar,     "south" -> pantry, "west" -> diner   ))
+      kitchen.setNeighbors(Vector(/*"north" -> lobby,*/   "east" -> bar,     "south" -> pantry, "west" -> diner   ))
           bar.setNeighbors(Vector(                                                          "west" -> kitchen ))
         diner.setNeighbors(Vector(                    "east" -> kitchen                                       ))
         lobby.setNeighbors(Vector(/*north" -> home,*/                       "south" -> kitchen                   ))
@@ -55,9 +55,7 @@ class Adventure {
   this.diner.addItem(new Item("money", "___________________________________\n|#######====================#######|\n|#(|)*UNITED STATES OF AMERICA*(|)#|\n" + raw"|#**          /===\   ********  **#|" + "\n|*# {G}      | (') |             #*|\n" + raw"|#*  ******  | /v\ |    T E N    *#|" + "\n" + raw"|#(|)         \===/            (|)#|" + "\n|##=========TEN DOLLARS==========##|\n------------------------------------\n\nIt's 10 dollars."){
     def use = {
       if (player.location == bartender.location){
-        player.drop("money")
-        bartender.get("money")
-        "You buy a glass of bourbon. Loyd seems happy, you should speak with him again."
+        player.say("loyd")
       }
       else "I think I should use this in the bar instead."
     }

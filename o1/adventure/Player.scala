@@ -89,15 +89,38 @@ class Player(name: String,startingArea: Area) {
     else "If you want to use something, you need to pick it up first."
   }
   
+  var loydIsHappy = false
+  
   def say(name: String) = {
     if (name == "loyd"){
-      if (this.location.name == "Bar") {
-        this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
-          def use = {
-            ""
+      if (this.location.name == "Bar"){
+        if (this.loydIsHappy){
+              val currentLoc = this.location
+              this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
+                def use = {
+                if (currentLoc.name == "Kitchen"){
+                    currentLoc.setNeighbors(Vector("north" -> currentLoc.neighbor("north").get))
+                    "You unlock the door to the lobby."
+                  }
+                  else "You can't use the keycard here."
+                }
+              })
+              this.loydIsHappy = false
+              "You: 'Hi Loyd. I always liked you. You were always the best of them.'\n     'Best goddamned bartender from Timbuctoo to Portland Maine.'\nLoyd: 'Thank you for saying so.'\nYou: 'You know Loyd, I'm in a pickle here.'\nLoyd: 'How can I help you Sir?'\nYou: 'I really need to get to the lobby, but it's locked.'\nLoyd: 'Of course, feel free to use my keycard. On one condition though, you have to return it.'"
+        }
+        else {
+          val a = readLine("Hello Sir, would you like a glass of Bourbon?:(y/n)")
+          if (a.toLowerCase() == "y"){
+            if (!this.has("money"))
+              "Do you think this is charity? Please return with money."
+            else {
+              this.loydIsHappy = true
+              this.itemsCarried -= "money"
+              "Thank you for your purchase. I'll be here if you need anything."
+            }
           }
-        })
-        "You: 'Hi Loyd. I always liked you. You were always the best of them.'\n     'Best goddamned bartender from Timbuctoo to Portland Maine.'\nLoyd: 'Thank you for saying so.'\nYou: 'You know Loyd, I'm in a pickle here.'\nLoyd: 'How can I help you Sir?'\n"
+          else "Ok then."
+        }
       }
       else "If you want to talk to Loyd you should find him first."
     }
