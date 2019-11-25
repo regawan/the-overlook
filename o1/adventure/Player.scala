@@ -112,7 +112,7 @@ class Player(name: String,startingArea: Area) {
           val a = readLine("Hello Sir, would you like a glass of Bourbon?:(y/n)")
           if (a.toLowerCase() == "y"){
             if (!this.has("money"))
-              "Do you think this is charity? Please return with money."
+              "I'm sorry Sir, you must not mistake us for a charity. Please return with money."
             else {
               this.loydIsHappy = true
               this.itemsCarried -= "money"
