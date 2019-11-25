@@ -98,24 +98,24 @@ class Player(name: String,startingArea: Area) {
     if (name == "loyd"){
       if (this.location.name == "Bar"){
         if (this.loydIsHappy){ // Loyd is happy if you buy a drink with money.
-              this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
-                def use = {
-                if (location.name == "Kitchen"){
-                    location.setNeighbor("north", new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA pale woman is looking at you, it's Wendy!"){
-                      this.setNeighbor("south", location)
-                      val wendy = new Player("Wendy Torrance", this)
-                    })
-                    "You unlock the door to the lobby."
-                  }
-                  else "You can't use the keycard here."
-                }
-              })
-              this.loydIsHappy = false
-              "You: 'Hi Loyd. I always liked you. You were always the best of them.'\n     'Best goddamned bartender from Timbuctoo to Portland Maine.'\nLoyd: 'Thank you for saying so.'\nYou: 'You know Loyd, I'm in a pickle here.'\nLoyd: 'How can I help you Sir?'\nYou: 'I really need to get to the lobby, but it's locked.'\nLoyd: 'Of course, feel free to use my keycard. On one condition though, you have to return it.'"
+          this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
+            def use = {
+              if (location.name == "Kitchen"){
+                location.setNeighbor("north", new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA pale woman is looking at you, it's Wendy!"){
+                  this.setNeighbor("south", location)
+                  val wendy = new Player("Wendy Torrance", this)
+                })
+                "You unlock the door to the lobby."
+              }
+              else "You can't use the keycard here."
+            }
+          })
+          this.loydIsHappy = false
+          "You: 'Hi Loyd. I always liked you. You were always the best of them.'\n     'Best goddamned bartender from Timbuctoo to Portland Maine.'\nLoyd: 'Thank you for saying so.'\nYou: 'You know Loyd, I'm in a pickle here.'\nLoyd: 'How can I help you Sir?'\nYou: 'I really need to get to the lobby, but it's locked.'\nLoyd: 'Of course, feel free to use my keycard. On one condition though, you have to return it.'"
         }
         else {
-          val a = readLine("Hello Sir, would you like a glass of Bourbon?:(y/n)")
-          if (a.toLowerCase() == "y"){
+          val yesOrNo = readLine("Hello Sir, would you like a glass of Bourbon?(y/n):")
+          if (yesOrNo.toLowerCase() == "y"){
             if (!this.has("money"))
               "I'm sorry Sir, you must not mistake us for a charity. Please return with money."
             else {
@@ -132,14 +132,15 @@ class Player(name: String,startingArea: Area) {
     else if (name == "wendy"){
       if (this.location.name == "Lobby"){
         if (!this.has("knife")){
-        this.wendyIsHappy = true
-        "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'"
-      }
-      else {
-        this.failed=true
-        "You: 'Hi Wendy. Why are you crying? You are going to stay here forever!'\nWendy: 'No Jack, I know what you are doing... You are a MONSTER!!!\n       'The police is waiting behind that door, go to hell Jack.'"
-      }
-    } else "If you want to talk to Wendy you should find her first."
+          this.wendyIsHappy = true
+          "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'"
+        }
+        else {
+          this.failed=true
+          "You: 'Hi Wendy. Why are you crying? You are going to stay here forever!'\nWendy: 'No Jack, I know what you are doing... You are a MONSTER!!!\n       'The police is waiting behind that door, go to hell Jack.'"
+        }
+      } 
+      else "If you want to talk to Wendy you should find her first."
     }
     else s"There is noone named $name in this room."
   }
