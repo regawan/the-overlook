@@ -39,14 +39,16 @@ class Adventure {
       else "You swing your axe but hit nothing."
     }
   })
+  
+  var wendyIsDead=false
   this.kitchen.addItem(new Item("knife", "___________________________________ ______________________\n"+
         raw"\                                  | (_)     (_)    (_)   \ " + "\n" +
         raw" `.                                |  __________________   }" +"\n" +
         raw"   `-..........................____|_(                  )_/" + "\n\nIt's a big kitchen knife. Recently sharpened."
   ){
     def use = {
-      if (player.location == wendy.location){
-        lobby.setNeighbors(Vector("north" -> home,"south" -> kitchen))
+      if ((player.location == kitchen) && player.wendyIsHappy){
+        wendyIsDead=true
         "You use the knife to lunge towards Wendy."
       }
       else "You swing your knife and hit noone."
@@ -60,6 +62,7 @@ class Adventure {
       else "I think I should use this in the bar instead."
     }
   })
+  
   
   /** The character that the player controls in the game. */
   val player = new Player("Jack Torrance", pantry)
@@ -75,10 +78,10 @@ class Adventure {
 
 
   /** Determines if the adventure is complete, that is, if the player has won. */
-  def isComplete = false
+  def isComplete = this.wendyIsDead
 
   /** Determines whether the player has won, lost, or quit, thereby ending the game. */
-  def isOver = this.isComplete || this.player.hasQuit || this.turnCount == this.timeLimit
+  def isOver = this.isComplete || this.player.hasQuit || this.turnCount == this.timeLimit || player.failed
 
   /** Returns a message that is to be displayed to the player at the beginning of the game. */
   def welcomeMessage = "\nd888888b db   db d88888b       .d88b.  db    db d88888b d8888b. db       .d88b.   .d88b.  db   dD\n`~~88~~' 88   88 88'          .8P  Y8. 88    88 88'     88  `8D 88      .8P  Y8. .8P  Y8. 88 ,8P'\n   88    88ooo88 88ooooo      88    88 Y8    8P 88ooooo 88oobY' 88      88    88 88    88 88,8P\n   88    88~~~88 88~~~~~      88    88 `8b  d8' 88~~~~~ 88`8b   88      88    88 88    88 88`8b\n   88    88   88 88.          `8b  d8'  `8bd8'  88.     88 `88. 88booo. `8b  d8' `8b  d8' 88 `88.\n   YP    YP   YP Y88888P       `Y88P'     YP    Y88888P 88   YD Y88888P  `Y88P'   `Y88P'  YP   YD\n\nYou wake up in a cold room with a throbbing headache.\nOddly, you can't remember why you are here and your head is bleeding.\nYou see a bunch of Heinz baked beans on some shelves, jummy.\n\nThere's a door in front of you with the word Redrum, you get a strange urge. MAKE HER STAY FOREVER"
@@ -91,6 +94,8 @@ class Adventure {
       "You made her stay, a happy family stays together.\nGame completed."
     else if (this.turnCount == this.timeLimit)
       "Oh no! You collapsed from the bleeding.\nGame over!"
+    else if (player.failed)
+      "Oh no! Wendy saw your knife and escaped!\nGame over!"
     else  // game over due to player quitting
       "Quitter!"
   }

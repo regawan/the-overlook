@@ -7,7 +7,6 @@ The Kitchen:
 Enter the diner to the west, get the money. Go east twice to enter the bar.
 Use the money or talk to loyd and buy a drink. Speak with him again and 
 he will drop his keycard. Get the keycard. Now go west to the kitchen
-and use the keycard. The lobby door to the north will open. Go north without the knife.
+and use the keycard. The lobby door to the north will open. Go north.
 
 The Lobby:
-Talk to Wendy, go south. Use the knife.

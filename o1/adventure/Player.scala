@@ -90,16 +90,21 @@ class Player(name: String,startingArea: Area) {
   }
   
   var loydIsHappy = false
+  var wendyIsHappy = false
+  var failed = false
   
+  //say function that interacts with NPC's
   def say(name: String) = {
     if (name == "loyd"){
       if (this.location.name == "Bar"){
-        if (this.loydIsHappy){
-              val currentLoc = this.location
+        if (this.loydIsHappy){ // Loyd is happy if you buy a drink with money.
               this.location.addItem(new Item("keycard", "It's Loyd's keycard.") {
                 def use = {
-                if (currentLoc.name == "Kitchen"){
-                    currentLoc.setNeighbors(Vector("north" -> currentLoc.neighbor("north").get))
+                if (location.name == "Kitchen"){
+                    location.setNeighbor("north", new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA pale woman is looking at you, it's Wendy!"){
+                      this.setNeighbor("south", location)
+                      val wendy = new Player("Wendy Torrance", this)
+                    })
                     "You unlock the door to the lobby."
                   }
                   else "You can't use the keycard here."
@@ -125,9 +130,16 @@ class Player(name: String,startingArea: Area) {
       else "If you want to talk to Loyd you should find him first."
     }
     else if (name == "wendy"){
-      if (this.location.name == "Lobby")
-        "You: 'Hi Wendy. Why are you crying? You are going to stay here forever!'\n     'This is what you wanted right!?'\nWendy: 'LEAVE US ALONE!!!'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'PLEASE JACK'\nYou: 'I think you have to stay, HERE'S JOHNNY!'"
-      else "If you want to talk to Wendy you should find her first."
+      if (this.location.name == "Lobby"){
+        if (!this.has("knife")){
+        this.wendyIsHappy = true
+        "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'"
+      }
+      else {
+        this.failed=true
+        "You: 'Hi Wendy. Why are you crying? You are going to stay here forever!'\nWendy: 'No Jack, I know what you are doing... You are a MONSTER!!!\n       'The police is waiting behind that door, go to hell Jack.'"
+      }
+    } else "If you want to talk to Wendy you should find her first."
     }
     else s"There is noone named $name in this room."
   }
