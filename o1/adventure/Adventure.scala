@@ -94,8 +94,17 @@ class Adventure {
   def isOver = this.isComplete || this.player.hasQuit || this.turnCount == this.timeLimit || player.failed
 
   /** Returns a message that is to be displayed to the player at the beginning of the game. */
-  def welcomeMessage = "\nd888888b db   db d88888b       .d88b.  db    db d88888b d8888b. db       .d88b.   .d88b.  db   dD\n`~~88~~' 88   88 88'          .8P  Y8. 88    88 88'     88  `8D 88      .8P  Y8. .8P  Y8. 88 ,8P'\n   88    88ooo88 88ooooo      88    88 Y8    8P 88ooooo 88oobY' 88      88    88 88    88 88,8P\n   88    88~~~88 88~~~~~      88    88 `8b  d8' 88~~~~~ 88`8b   88      88    88 88    88 88`8b\n   88    88   88 88.          `8b  d8'  `8bd8'  88.     88 `88. 88booo. `8b  d8' `8b  d8' 88 `88.\n   YP    YP   YP Y88888P       `Y88P'     YP    Y88888P 88   YD Y88888P  `Y88P'   `Y88P'  YP   YD\n\nYou wake up in a cold room with a throbbing headache.\nOddly, you can't remember why you are here and your head is bleeding.\nYou see a bunch of Heinz baked beans on some shelves, jummy.\n\nThere's a door in front of you with the word Redrum, you get a strange urge. MAKE HER STAY FOREVER"
-
+  def welcomeMessage = { "\nd888888b db   db d88888b       .d88b.  db    db d88888b d8888b. db       .d88b.   .d88b.  db   dD\n" + 
+  "`~~88~~' 88   88 88'          .8P  Y8. 88    88 88'     88  `8D 88      .8P  Y8. .8P  Y8. 88 ,8P'\n" +
+  "   88    88ooo88 88ooooo      88    88 Y8    8P 88ooooo 88oobY' 88      88    88 88    88 88,8P\n" + 
+  "   88    88~~~88 88~~~~~      88    88 `8b  d8' 88~~~~~ 88`8b   88      88    88 88    88 88`8b\n" +
+  "   88    88   88 88.          `8b  d8'  `8bd8'  88.     88 `88. 88booo. `8b  d8' `8b  d8' 88 `88.\n" + 
+  "   YP    YP   YP Y88888P       `Y88P'     YP    Y88888P 88   YD Y88888P  `Y88P'   `Y88P'  YP   YD\n\n" +
+  "You wake up in a cold room with a throbbing headache.\n" +
+  "Oddly, you can't remember why you are here and your head is bleeding.\n" +
+  "You see a bunch of Heinz baked beans on some shelves, jummy.\n\n" +
+  "There's a door in front of you with the word Redrum, you get a strange urge. MAKE HER STAY FOREVER!"
+  }
 
   /** Returns a message that is to be displayed to the player at the end of the game. The message
     * will be different depending on whether or not the player has completed their quest. */
