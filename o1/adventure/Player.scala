@@ -55,7 +55,7 @@ class Player(name: String,startingArea: Area) {
   def get(itemName: String) = {
     if (this.location.contains(itemName)) {
       this.itemsCarried += itemName -> this.location.removeItem(itemName).get
-      s"You pick up the $itemName."
+      s"You pick up the $itemName.\n" + this.itemsCarried(itemName).description
       }
     else s"There is no $itemName here to pick up."
   }
