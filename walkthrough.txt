@@ -1,4 +1,4 @@
-Walthrough of Andreas Wager's text adventure game 'The Overlook'
+Walkthrough of the text adventure game 'The Overlook'
 
 The Pantry room:
 Pick up the fireaxe and use it on the door. Go north.
@@ -10,4 +10,4 @@ he will drop his keycard. Get the keycard. Now go west to the kitchen
 and use the keycard. The lobby door to the north will open. Go north without the knife.
 
 The Lobby:
-Talk to Wendy, go south. Use the knife.
+Talk to Wendy, go south to the kitchen. Use the knife. Good Job!
