@@ -131,7 +131,7 @@ class Player(name: String,startingArea: Area) {
             else {
               this.loydIsHappy = true
               this.itemsCarried -= "money"
-              "Thank you for your purchase. I'll be here if you need anything."
+              "Thank you for your purchase. If you have any questions about this place, just say my name."
             }
           }
           else "Ok then."
@@ -143,7 +143,7 @@ class Player(name: String,startingArea: Area) {
       if (this.location.name == "Lobby"){
         if (!this.has("knife")){
           this.wendyIsHappy = true
-          "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'\nWendy: 'Show me the way, honey.'"
+          "You: 'Hi Wendy. Why are you crying? We are going to stay here forever.'\n     'This is what you wanted right!?'\nWendy: 'EITHER YOU STAY OR WE LEAVE NOW'\nYou: 'You know Wendy, I'm in a REAL pickle here.'\nWendy: 'Please honey!'\nYou: 'You should eat something, lets look for some food in the kitchen...'\nWendy: 'Just a bite, and then we leave!'\nYou: 'Sure darling, whatever you say...'\nWendy: 'Show me the way to the kitchen.'"
         }
         else {
           this.failed=true
