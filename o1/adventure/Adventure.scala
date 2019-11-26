@@ -17,7 +17,7 @@ class Adventure {
   private val pantry      = new Area("Pantry", "You are in a pantry. There's blood on the floor.\nIt's chilly.")
   private val kitchen     = new Area("Kitchen", "You are in the hotel kitchen. Not a soul.\nIt's eerily quiet.")
   private val bar         = new Area("Bar", "You are in the hotel bar. There's a man standing behind the counter.\nHe looks right through you. Just as if you really weren't there.\nYou remember that his name is Loyd.\nThe exits to the east are blocked by butlers.")
-  private val diner       = new Area("Diner", "You are the hotel diner. It's empty.\nThe exits to west are blocked from the inside.")
+  private val diner       = new Area("Diner", "You are the hotel diner. The janitor is wiping a table. Better not disturb him.\nThe exits to west are blocked from the inside.")
   private var lobby       = new Area("Lobby", "You are in the lobby of the hotel. 'The Overlook' is written on the desk.\nA pale woman is looking at you, it's Wendy!"){
     isPassable = false
   }
@@ -38,7 +38,7 @@ class Adventure {
         pantry.setNeighbors(Vector("north" -> kitchen))
         player.itemsCarried -= "fireaxe"
         "You use the fireaxe to destroy the hinges. The door falls to the ground.\n" +
-        "The fireaxe broke in the the process"
+        "The fireaxe broke in the process."
       }
       else "You swing your axe but hit nothing."
     }
@@ -55,6 +55,7 @@ class Adventure {
         wendyIsDead=true
         "You use the knife to lunge towards Wendy."
       }
+      else if (player.location != kitchen) "Now is not the time to use that because you might get caught. Mabye somewhere more quiet..."
       else "You swing your knife and hit noone."
     }
   })
@@ -88,7 +89,7 @@ class Adventure {
   /** The number of turns that have passed since the start of the game. */
   var turnCount = 0
   /** The maximum number of turns that this adventure game allows before time runs out. */
-  val timeLimit = 25
+  val timeLimit = 27
 
   /** Determines if the adventure is complete, that is, if the player has won. */
   def isComplete = this.wendyIsDead
