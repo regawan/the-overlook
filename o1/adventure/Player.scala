@@ -26,14 +26,14 @@ class Player(name: String,startingArea: Area) {
   /** Attempts to move the player in the given direction. This is successful if there
     * is an exit from the player's current location towards the direction name. Returns
     * a description of the result: "You go DIRECTION." or "You can't go DIRECTION." */
-  def go(direction: String) = {
+  def go(direction: String): String = {
     val destination = this.location.neighbor(direction)
-    if (destination.isDefined && destination.get.isPassable ) {
-      "You go " + direction + "."
-      this.currentLocation = destination.getOrElse(this.currentLocation)
-    }
     if (destination.isDefined && !destination.get.isPassable) "The door is locked. It looks like it can be opened with a keycard."
-    else"You can't go " + direction + "."
+    if (destination.isDefined && destination.get.isPassable ) {
+      this.currentLocation = destination.getOrElse(this.currentLocation)
+      "You go " + direction + "."
+    }
+    else "You can't go " + direction + "."
   }
 
 

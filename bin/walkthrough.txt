@@ -1,5 +1,7 @@
 Walkthrough of the text adventure game 'The Overlook'
 
+Note: You have to use the console to answer Loyd when you buy a drink.
+
 The Pantry room:
 Pick up the fireaxe and use it on the door. Go north.
 
@@ -11,4 +13,4 @@ and use the keycard. The lobby door to the north will open. Go north without the
 knife so Wendy won't be startled.
 
 The Lobby:
-Talk to Wendy, go south to the kitchen. Use the knife. Good Job!
+Talk to Wendy, go south to the kitchen. Use the knife. Game completed!
