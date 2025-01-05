@@ -25,3 +25,7 @@ The Kitchen:
 
 The Lobby:
 1. Talk to Wendy, go south to the kitchen. Use the knife. Game completed!
+
+## Map
+
+![Hotel Map](hotel_map.gif)
