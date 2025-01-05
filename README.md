@@ -2,7 +2,7 @@
 
 *Experience The Shining from Jack's point of view. You wake up locked in the pantry, with a strange urge to make everyone stay!*
 
-**My first game!** Text-based, horrifying, made with Scala and including puzzling choices. Final project for the Aalto University Programming 1 course in 2019.
+**My first game!** Text-based, horrifying, made with Scala and including ASCII art. Final project for the Aalto University Programming 1 course in 2019.
 
 ## Walkthrough
 
