@@ -4,10 +4,6 @@
 
 **My first game!** Text-based, horrifying, made with Scala and including ASCII art. Final project for the Aalto University Programming 1 course in 2019. Made in collaboration with Oliver Otterström!
 
-## Compiling
-
-I touched this project for the last time in 2019 and haven't attempted to compile it since then. Worked to run the GUI in Eclipse 2017.
-
 ## Walkthrough
 
 *Note: You have to use the console to answer Loyd when you buy a drink.*
